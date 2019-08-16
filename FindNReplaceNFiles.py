@@ -5,17 +5,14 @@ import re
 pluginName = "FindNReplaceNFiles"
 debugOn = True
 
+# Plugin print for more readability
 def pprint(message, addNewLine=False):
     if debugOn:
         print("{}: {}".format(pluginName, message))
         if addNewLine:
             print()
 
-class ExampleCommand(sublime_plugin.EventListener):
-    # Plugin print for more readability
-
-
-
+class FindNReplaceCommand(sublime_plugin.EventListener):
     def on_pre_close(self, view):
         if view.name() != "Find Results":
             pprint("Nothing to do here")
@@ -28,7 +25,7 @@ class ExampleCommand(sublime_plugin.EventListener):
         if not should_make_changes:
             pprint("User chose to not save changes")
             return 
-            
+
         # save any open tabs, so changes don't get mix-matched
         window = sublime.active_window()
         for view in window.views():
